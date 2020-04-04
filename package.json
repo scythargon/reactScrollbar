@@ -1,6 +1,6 @@
 {
   "name": "react-awesome-scrollbar",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "ScrollArea component for react",
   "main": "./dist/scrollArea.js",
   "scripts": {
