@@ -72,9 +72,8 @@ class ScrollBar extends React.Component {
 
         return (
             <Spring native to={scrollStyles}>
-                { style => {
-                    {console.log('aaaa', style)}
-                    return (<div
+                {style =>
+                    <div
                         className={scrollbarClasses}
                         style={containerStyle}
                         onMouseDown={this.handleScrollBarContainerClick.bind(this)}
@@ -86,8 +85,6 @@ class ScrollBar extends React.Component {
                             onMouseDown={this.handleMouseDown.bind(this)}
                         />
                     </div>
-        );
-                    }
                 }
             </Spring>
         );

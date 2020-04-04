@@ -54,7 +54,6 @@ function getRendererComponentInstance(renderer){
 describe('ScrollArea component', () => {
     it('Should render children and both scrollbars', () => {
         let {scrollbars, content} = setupComponentWithMockedSizes();
-        console.log('scrollbars', content)
 
         expect(scrollbars.length).toBe(2);
 
