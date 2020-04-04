@@ -4,7 +4,7 @@
   "description": "ScrollArea component for react",
   "main": "./dist/scrollArea.js",
   "scripts": {
-    "build": "npx gulp",
+    "build": "npx gulp production",
     "test": "npx karma start karma.config.js --single-run --browsers PhantomJS"
   },
   "repository": {
