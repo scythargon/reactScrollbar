@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import lineHeight from 'line-height';
-import { Motion, spring } from 'react-motion';
+import { Spring, animated } from 'react-spring/renderprops.cjs'
 
 import {
   findDOMNode, warnAboutFunctionChild, warnAboutElementChild, positiveOrZero, modifyObjValues,
@@ -142,16 +142,15 @@ export default class ScrollArea extends React.Component {
             marginTop: -this.state.topPosition,
             marginLeft: -this.state.leftPosition
         };
-        let springifiedContentStyle = withMotion ? modifyObjValues(contentStyle, x => spring(x)) : contentStyle;
 
         return (
-            <Motion style={springifiedContentStyle}>
+            <Spring native to={contentStyle}>
                 { style =>
                     <div
                         ref={x => this.wrapper = x}
                         className={classes}
                         style={this.props.style}>
-                        <div
+                        <animated.div
                             ref={x => this.content = x}
                             style={{ ...this.props.contentStyle, ...style }}
                             className={contentClasses}
@@ -162,12 +161,12 @@ export default class ScrollArea extends React.Component {
                             tabIndex={this.props.focusableTabIndex}
                         >
                             {children}
-                        </div>
+                        </animated.div>
                         {scrollbarY}
                         {scrollbarX}
                     </div>
                 }
-            </Motion>
+            </Spring>
         );
     }
 

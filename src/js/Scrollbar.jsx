@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Motion, spring } from 'react-motion';
-import { modifyObjValues } from './utils';
+import { Spring, animated } from 'react-spring/renderprops.cjs'
 
 const calculateFractionalPosition = (realContentSize, containerSize, contentPosition) => {
     const relativeSize = realContentSize - containerSize;
@@ -65,31 +64,32 @@ class ScrollBar extends React.Component {
     calculateState = calculateState;
 
     render(){
-        let {smoothScrolling, isDragging, type, scrollbarStyle, containerStyle} = this.props;
+        let { isDragging, type, scrollbarStyle, containerStyle} = this.props;
         let isVoriziontal = type === 'horizontal';
         let isVertical = type === 'vertical';
         let scrollStyles = this.createScrollStyles();
-        let springifiedScrollStyles = smoothScrolling ? modifyObjValues(scrollStyles, x => spring(x)) : scrollStyles;
-
         let scrollbarClasses = `scrollbar-container ${isDragging ? 'active' : ''} ${isVoriziontal ? 'horizontal' : ''} ${isVertical ? 'vertical' : ''}`;
 
         return (
-            <Motion style={springifiedScrollStyles}>
-                { style =>
-                    <div
+            <Spring native to={scrollStyles}>
+                { style => {
+                    {console.log('aaaa', style)}
+                    return (<div
                         className={scrollbarClasses}
                         style={containerStyle}
                         onMouseDown={this.handleScrollBarContainerClick.bind(this)}
                         ref={ x => this.scrollbarContainer = x }
                     >
-                        <div
+                        <animated.div
                             className="scrollbar"
                             style={{ ...scrollbarStyle, ...style }}
                             onMouseDown={this.handleMouseDown.bind(this)}
                         />
                     </div>
+        );
+                    }
                 }
-            </Motion>
+            </Spring>
         );
     }
 

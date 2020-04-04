@@ -7,6 +7,7 @@ import {render} from 'react-dom';
 import ScrollArea from '../src/js/ScrollArea';
 import Scrollbar from '../src/js/Scrollbar';
 import { createRenderer } from 'react-test-renderer/shallow';
+import { animated } from 'react-spring/renderprops.cjs'
 
 function setup(props, sizes){
     let renderer = createRenderer();
@@ -53,11 +54,12 @@ function getRendererComponentInstance(renderer){
 describe('ScrollArea component', () => {
     it('Should render children and both scrollbars', () => {
         let {scrollbars, content} = setupComponentWithMockedSizes();
+        console.log('scrollbars', content)
 
         expect(scrollbars.length).toBe(2);
 
         expect(content).toEqualJSX(
-            <div ref={() => {}}
+            <animated.div ref={() => {}}
                 style={{}}
                 className="scrollarea-content "
                 onTouchStart={() => {}}
@@ -67,7 +69,7 @@ describe('ScrollArea component', () => {
                 tabIndex={1}
             >
                 <p>content</p>
-            </div>);
+            </animated.div>);
     });
 
     it('Should render with tabindex set', () => {
@@ -75,7 +77,7 @@ describe('ScrollArea component', () => {
 
         expect(scrollbars.length).toBe(2);
         expect(content).toEqualJSX(
-            <div ref={() => {}}
+            <animated.div ref={() => {}}
                 style={{}}
                 tabIndex={100}
                 className="scrollarea-content "
@@ -85,7 +87,7 @@ describe('ScrollArea component', () => {
                 onKeyDown={() => {}}
             >
                 <p>content</p>
-            </div>);
+            </animated.div>);
     });
 
     it('Could render only vertical scrollbar', () => {

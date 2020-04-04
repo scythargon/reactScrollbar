@@ -5,6 +5,7 @@
   "main": "./dist/scrollArea.js",
   "scripts": {
     "build": "npx gulp production",
+    "prepublishOnly": "npm run build",
     "test": "npx karma start karma.config.js --single-run --browsers PhantomJS"
   },
   "repository": {
@@ -27,7 +28,8 @@
   "dependencies": {
     "config": "^1.24.0",
     "line-height": "^0.1.1",
-    "react-motion": "^0.5.2"
+    "react-motion": "^0.5.2",
+    "react-spring": "^8.0.27"
   },
   "devDependencies": {
     "babel": "^6.5.2",
@@ -41,6 +43,7 @@
     "chai": "^3.5.0",
     "css-loader": "^0.23.1",
     "expect": "^1.13.4",
+    "expect-jsx": "^5.0.0",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-concat": "^2.5.2",
