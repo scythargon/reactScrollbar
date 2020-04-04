@@ -12,7 +12,7 @@ Simple ScrollArea component built for [React](http://facebook.github.io/react/).
 npm install react-scrollbar --save
 ```
 
-React Scrollbar requires **React 0.13 or later**
+React Scrollbar requires **React 16.3 or later**
 
 Features:
  - built with and for `React`
@@ -24,58 +24,25 @@ Features:
  - customizable styles
  - and more...
 
-## Usage examples
-
-#### React 0.14
-```js
-    var React = require('react');
-    var ReactDOM = require('react-dom');
-    var ScrollArea = require('react-scrollbar');
-
-    var App = React.createClass({
-      render() {
-        return (
-          <ScrollArea
-            speed={0.8}
-            className="area"
-            contentClassName="content"
-            horizontal={false}
-            >
-            <div>Some long content.</div>
-          </ScrollArea>
-        );
-      }
-    });
-
-    ReactDOM.render(<App/>, document.body);
-```
-
-#### React 0.13
-For **React 0.13** you need to wrap `<ScrollArea>` child into a function.
-```js
-<ScrollArea>
-    { () => <div>Some long content. </div> }
-</ScrollArea>
-```
-
 #### Version without boundled css styles ####
 If you prefer including scrollbar without css styles boundled inline to js file it's possible to import package without them. It's useful when you want to make custom css changes in scrollbars without using `!important` in each line. 
 
 ```js
-    var ScrollArea = require('react-scrollbar/no-css');
+    import ScrollArea from 'react-scrollbar/no-css';
 ```
 Then **include scrollArea.css** file into your project.
 
 
 ### Run the example app
 
+For run gulp requied Node 8 or earlier
 ```bash
 git clone https://github.com/souhe/reactScrollbar.git
 cd reactScrollbar
 npm install
-gulp build-examples
-gulp less-examples
-gulp watch
+npx gulp build-examples
+npx gulp less-examples
+npx gulp watch
 ```
 
 then open [http://localhost:8003](http://localhost:8003).
@@ -191,7 +158,7 @@ In context of each `<ScrollArea>` child could be injected an object `scrollArea`
 #### `refresh()`
 That method allows manual refreshing of the scrollbar.
 
-React 0.14 example using ES6 syntax:
+## example
 ```js
 class App extends React.Component {
     render(){
@@ -239,7 +206,7 @@ It allows to scroll to the right of `ScrollArea` component.
 It moves horizontal scrollbar. `leftPosition` is a distance between left edge of `scrollArea` container and left edge of `scrollArea` content.  
 
 # Change log
-Every release is documented on the Github [Releases](https://github.com/souhe/reactScrollbar/releases) page. 
+Every release is documented on the Github [Releases](https://github.com/IGoRFonin/reactScrollbar/releases) page. 
 
 # License
 MIT

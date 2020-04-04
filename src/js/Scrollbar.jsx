@@ -3,10 +3,34 @@ import PropTypes from 'prop-types';
 import { Motion, spring } from 'react-motion';
 import { modifyObjValues } from './utils';
 
+const calculateFractionalPosition = (realContentSize, containerSize, contentPosition) => {
+    const relativeSize = realContentSize - containerSize;
+
+    return 1 - ((relativeSize - contentPosition) / relativeSize);
+}
+
+const calculateState = (props) => {
+    const fractionalPosition = calculateFractionalPosition(props.realSize, props.containerSize, props.position);
+    const proportionalToPageScrollSize = props.containerSize * props.containerSize / props.realSize;
+    const scrollSize = proportionalToPageScrollSize < props.minScrollSize ? props.minScrollSize : proportionalToPageScrollSize;
+
+    const scrollPosition = (props.containerSize - scrollSize) * fractionalPosition;
+    return {
+        scrollSize: scrollSize,
+        position: Math.round(scrollPosition)
+    };
+}
+
 class ScrollBar extends React.Component {
+    static getDerivedStateFromProps(props) {
+        return calculateState(props);
+    }
+
     constructor(props){
         super(props);
-        let newState = this.calculateState(props);
+
+        const newState = calculateState(props);
+
         this.state = {
             position: newState.position,
             scrollSize: newState.scrollSize,
@@ -14,7 +38,7 @@ class ScrollBar extends React.Component {
             lastClientPosition: 0
         };
 
-        if(props.type === 'vertical'){
+        if (props.type === 'vertical'){
             this.bindedHandleMouseMove = this.handleMouseMoveForVertical.bind(this);
         } else {
             this.bindedHandleMouseMove = this.handleMouseMoveForHorizontal.bind(this);
@@ -30,10 +54,6 @@ class ScrollBar extends React.Component {
         }
     }
 
-    componentWillReceiveProps(nextProps){
-        this.setState(this.calculateState(nextProps));
-    }
-
     componentWillUnmount(){
         if (this.props.ownerDocument) {
             this.props.ownerDocument.removeEventListener("mousemove", this.bindedHandleMouseMove);
@@ -41,23 +61,8 @@ class ScrollBar extends React.Component {
         }
     }
 
-    calculateFractionalPosition(realContentSize, containerSize, contentPosition){
-        let relativeSize = realContentSize - containerSize;
-
-        return 1 - ((relativeSize - contentPosition) / relativeSize);
-    }
-
-    calculateState(props){
-        let fractionalPosition = this.calculateFractionalPosition(props.realSize, props.containerSize, props.position);
-        let proportionalToPageScrollSize = props.containerSize * props.containerSize / props.realSize;
-        let scrollSize = proportionalToPageScrollSize < props.minScrollSize ? props.minScrollSize : proportionalToPageScrollSize;
-
-        let scrollPosition = (props.containerSize - scrollSize) * fractionalPosition;
-        return {
-            scrollSize: scrollSize,
-            position: Math.round(scrollPosition)
-        };
-    }
+    calculateFractionalPosition = calculateFractionalPosition;
+    calculateState = calculateState;
 
     render(){
         let {smoothScrolling, isDragging, type, scrollbarStyle, containerStyle} = this.props;

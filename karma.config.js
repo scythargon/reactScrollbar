@@ -4,6 +4,7 @@ module.exports = function (config) {
   config.set({
     browsers: [ 'PhantomJS', 'Chrome' ],
     files: [
+      'node_modules/babel-polyfill/dist/polyfill.js',
       './test/tests.bundle.js'
     ],
     frameworks: [ 'mocha' ],
@@ -20,7 +21,7 @@ module.exports = function (config) {
         },
         module: {
             loaders: [
-                { test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel' },
+                { test: /\.jsx?$/, loader: 'babel' },
                 { test: /\.less$/, loader: 'style!css!less' }
             ]
         }

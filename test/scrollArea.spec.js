@@ -4,12 +4,12 @@ expect.extend(expectJSX);
 
 import React, { Component } from 'react';
 import {render} from 'react-dom';
-import TestUtils from 'react-addons-test-utils';
 import ScrollArea from '../src/js/ScrollArea';
 import Scrollbar from '../src/js/Scrollbar';
+import { createRenderer } from 'react-test-renderer/shallow';
 
 function setup(props, sizes){
-    let renderer = TestUtils.createRenderer();
+    let renderer = createRenderer();
     renderer.render(<ScrollArea {...props}><p>content</p></ScrollArea>);
     let instance = getRendererComponentInstance(renderer);
 
@@ -47,7 +47,7 @@ function setupComponentWithMockedSizes(props) {
 }
 
 function getRendererComponentInstance(renderer){
-    return renderer._instance? renderer._instance._instance : null;
+    return renderer._instance? renderer._instance : null;
 }
 
 describe('ScrollArea component', () => {
