@@ -1,5 +1,5 @@
 {
-  "name": "react-awesome-scrollbar",
+  "name": "react-scrollbar",
   "version": "1.1.2",
   "description": "ScrollArea component for react",
   "main": "./dist/scrollArea.js",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/IGoRFonin/reactScrollbar.git"
+    "url": "https://github.com/scythargon/reactScrollbar.git"
   },
   "files": [
     "dist"
