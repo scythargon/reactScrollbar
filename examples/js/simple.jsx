@@ -11,7 +11,7 @@ class SimpleExample extends React.Component{
     }
 
     handleScroll(scrollData){
-      console.log(scrollData);
+      // console.log(scrollData);
     }
 
     render() {

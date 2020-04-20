@@ -196,6 +196,7 @@ export default class ScrollArea extends React.Component {
             e.stopPropagation();
         }
 
+
         let {touches} = e;
         if (touches.length === 1) {
             let {clientX, clientY} = touches[0];
@@ -221,7 +222,7 @@ export default class ScrollArea extends React.Component {
         if (typeof deltaX === 'undefined') deltaX = 0;
         if (typeof deltaY === 'undefined') deltaY = 0;
         if (Date.now() - timestamp < 200) {
-            this.setStateFromEvent(this.composeNewState(-deltaX * 10, -deltaY * 10), eventTypes.touchEnd);
+            this.setStateFromEvent(this.composeNewState(-deltaX * 20, -deltaY * 20), eventTypes.touchEnd);
         }
 
         this.eventPreviousValues = {

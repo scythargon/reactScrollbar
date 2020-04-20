@@ -78,9 +78,10 @@ gulp.task('production', function(callback){
 
 gulp.task('watch', function() {
     connect.server({
+        host: '0.0.0.0',
        root: 'examples',
        livereload: true,
-       port: 8003
+       port: 8005
      });
 
     gulp.watch(['src/**/*.js', 'src/**/*.jsx', 'src/**/*.less'], ['default']);
